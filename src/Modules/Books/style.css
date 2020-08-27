@@ -1,0 +1,10 @@
+.booksBlock{ display: flex; flex-direction:row; flex-wrap:wrap; justify-content:flex-start;}
+.bookBlockWrapper { padding: 30px; width: 259px;}
+.bookBlock { border: 1px solid #9c9494;}
+.bookBlockTop { height: 100px; background-color: #bd5252; padding: 10px 5px;}
+.bookBlockBottom { padding:15px; background-color:#9c9494;}
+.bookBlockBottom div { padding: 5px 2px; font-size: 16px; line-height: 15px;}
+.bookBlockBottom .bookTitle{ font-weight: 600; font-size: 16px;}
+.bookBlockBottom span{ display: block; max-width: 98%; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis;}
+.buyBtn button { background-color: #bd5252;  width: 100%; border: none; padding: 8px; color:  #ffffff; cursor: pointer}
+.buyBtn button:focus { outline: none;}
