@@ -2,8 +2,12 @@ import React from "react";
 import './style.css';
 import { Link } from "react-router-dom";
 
+interface Props {
+    component: React.ReactType,
+    props: any
+}
 
-function Layouts ({ props, component: Component }) {
+function Layouts({component:Component, props}: Props){
     return (
         <div className="container">
             <div className="header">
@@ -18,9 +22,10 @@ function Layouts ({ props, component: Component }) {
                     </ul>
                 </div>
             </div>
-            <Component {...props} />
+            <Component {...props}/>
         </div>
     )
 }
+
 
 export default Layouts;

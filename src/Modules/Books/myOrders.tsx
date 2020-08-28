@@ -1,7 +1,11 @@
 import React from "react";
 import './style.css';
 
-function Myorders (props) {
+interface Props {
+    props: any
+}
+
+function Myorders (props: Props) {
     return(
         <div>Hello pranthi Book View</div>
     )
