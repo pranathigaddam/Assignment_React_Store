@@ -1,75 +1,70 @@
 import React, { useCallback, useEffect } from "react";
 import {useSelector, useDispatch } from 'react-redux';
-import { getBooksListAction, AddBookToCartAction } from './actions';
+import { getBooksListAction, addBookToCartAction, setBoughtBooks, setSelectedTabName } from './actions';
 import { Link } from "react-router-dom";
 import './style.css';
+import { Book } from "./constants";
 
 interface Props {
     match: { params: { id: string; }; },
-    props: any,
 }
 
 interface RootState {
     books: any;
-    booksList: object,
+    booksList: Book[],
     isLoading: boolean
 }
   
 function BooksView (props:Props ) {
     const dispatch = useCallback(useDispatch(), [])
     const books = useSelector((state: RootState) => state.books );
-    console.log("book===booksview",books);
     
     useEffect(() => {
         dispatch(getBooksListAction());
     }, [dispatch]);
 
-    const handleCartItem = (book: object) => {
-        dispatch(AddBookToCartAction(book));
+    const handleCartItem = (book: Book) => {
+        dispatch(setSelectedTabName({selectedTabName: "Cart"}));
+        dispatch(addBookToCartAction([book]));
     }
-    console.log("books",books)
+
+    const handleBuybook = (book: Book) => {
+        book["isDelivered"] = true;
+        book["deliveredDate"] = new Date();
+        dispatch(setBoughtBooks([book]));
+    }
 
     const book = books.booksList.find((book: { id: string; }) => book.id === props.match.params.id) || {};
-    const { title="", price="", description="" } = book;
-    return(
+    const { title="", price="", description="", authorName="", pageCount="", ISBN="", bookImage="" } = book;
+    const isAddressAdded = Object.values(books.shippingAddress).filter(item => item).length === 5 ? true : false;
+       return(
         <div className="mainContainer">
-            <div>
-                <img src="" alt="Heelo"/>
-            </div>
-            <div>
-                <div>
-                    <ul>
-                        <li>
-                            <span>Book Title:</span>
-                             <span>{title}</span>
-                        </li>
-                        <li>
-                            <span>Book Price:</span>
-                            <span>{price}</span>
-                        </li>
-                        <li>
-                            <span>Author Name:</span>
-                            <span>{title}</span>
-                        </li>
-                        <li>
-                            <span>Page Count:</span>
-                            <span>{title}</span>
-                        </li>
-                        <li>
-                            <span>ISBN:</span>
-                            <span>{title}</span>
-                        </li>
-                        <li>
-                            <Link to="/cart"><button onClick={e =>handleCartItem(book)}>Add to Cart</button></Link>
-                            <Link to="/cart"><button>Buy Now</button></Link>
-                        </li>
-                    </ul>
+            <div className="bookViewBlock">
+            <div className="bookViewAvatar">
+                <div className="bookAvatarBlock lg">
+                    <img src={bookImage} alt="Book"/>
                 </div>
-                <div>
-
+            </div>
+            <div className="bookViewDetails">
+                <div className="bookViewInfo">
+                    <h2>{title}</h2>
+                    <p className="bookPrice">Price: &#8377;{price}</p>
+                    <p>Author Name: {authorName}</p>
+                    <p>Page Count:{pageCount}</p>
+                    <p>ISBN: {ISBN}</p>
+                    {!isAddressAdded && <p>*  To Add shipping Address to Click on Add to Cart</p>}
+                    <div className="bookViewActions">
+                        <Link to="/cart"><button className="primaryBtn" onClick={e =>handleCartItem(book)}> Add to Cart</button></Link>
+                        <Link to="/buy-book"><button onClick={e => handleBuybook(book)} disabled={!isAddressAdded} className={isAddressAdded ?"primaryBtn" : "disabledBtn"}>Buy Now</button></Link>
+                    </div>
+                    <div className="bookDescBlock">
+                        <h3>Description:</h3>
+                        <p>{description}</p>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     )
 }
 export default BooksView;

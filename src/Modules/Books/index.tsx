@@ -1,45 +1,54 @@
 import React, { useEffect, useCallback} from "react";
-import './style.css';
 import { Link } from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux';
-import { getBooksListAction } from './actions';
-
-interface Props {
-    props: any,
-}
+import { getBooksListAction, setShowmoreItemsCount, setSelectedTabName } from './actions';
+import { Book } from "./constants";
+import './style.css';
 
 interface RootState {
-    books: any,
-    booksList: object,
+    books: any
+    booksList: Book[]
     isLoading: boolean
 }
   
-function BooksList (props: Props) {
-    const dispatch = useCallback(useDispatch(), [])
+function BooksList () {
+    const dispatch = useCallback(useDispatch(), []);
     const books = useSelector((state: RootState) => state.books );
+    const { booksList, showMoreItemsCount } = books;
     
     useEffect(() => {
         dispatch(getBooksListAction());
     }, [dispatch]);
-    
+
+    const handleShowmoreItems = () => {
+        dispatch(setShowmoreItemsCount())
+    }
+
+    const handleBookView = (book: Book) => {
+        dispatch(setSelectedTabName({selectedTabName: book.title}));
+    }
+
     return (
         <div className="mainContainer">
             <div className="booksBlock">
-                {books.booksList.map((book: { title: string; description: string; id: number}, i: number) => {
+                {booksList.length > 0 ?
+                    booksList.slice(0, showMoreItemsCount).map((book: Book, i: number) => {
                     return( 
-                    <div className="bookBlockWrapper" key={i.toString()}>
-                    <div className="bookBlock">
-                        <div className="bookBlockTop">
-                        </div>
-                        <div className="bookBlockBottom">
-                        <div className="bookTitle"><span>{book.title}</span></div>
-                        <div><span>{book.description}</span></div>
-                        <div className="buyBtn"><Link to={"/book-view/"+book.id}><button>Buy Book</button></Link></div>
-                        </div>
-                    </div>
-                    </div>)
-                })}
+                        <div className="bookBlockWrapper" key={i.toString()}>
+                            <div className="bookBlockTop">
+                                <img src={book.bookImage} alt="Book"/>
+                            </div>
+                            <div  className="bookBlockBottom">
+                                <span className="bookTitle">{book.title}</span>
+                                <span className="bookDesc">{book.description}</span>
+                                <div className="buyBtn" onClick={e => handleBookView(book)}><Link to={`/book-view/${book.id}`}><button>Buy Book</button></Link></div>
+                            </div>
+                        </div>)
+                })
+                : null
+            }
             </div>
+            { booksList.length > showMoreItemsCount && <div className="booksBlock bookBlockShowmore"><span onClick={handleShowmoreItems}>show more</span></div>}
         </div>
     )
 }

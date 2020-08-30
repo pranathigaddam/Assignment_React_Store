@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './index.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,6 +10,7 @@ import BooksList from './Modules/Books';
 import BookView from './Modules/Books/bookView';
 import Cart from './Modules/Books/cart';
 import Myorders from './Modules/Books/myOrders';
+import buyBooks from './Modules/Books/buyBook';
 
 
 const Routes : React.StatelessComponent<{}> = () => {
@@ -20,6 +21,7 @@ const Routes : React.StatelessComponent<{}> = () => {
         <Route path="/book-view/:id" render={props => (<Layouts props={props} component={BookView} />)} />
         <Route path="/cart" render={props => (<Layouts props={props} component={Cart} />)} />
         <Route path="/my-orders" render={props => (<Layouts props={props} component={Myorders} />)} />
+        <Route path="/buy-book" render={props => (<Layouts props={props} component={buyBooks} />)} />
       </Switch>
     </Router>
   );

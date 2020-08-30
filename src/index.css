@@ -18,3 +18,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+..mainContainer { width: 100%; padding: 20px; border: 1px solid green; height: calc(100vh - 52px); overflow-y: auto;}
