@@ -29,19 +29,19 @@ function BooksList () {
     }
 
     return (
-        <div className="mainContainer">
-            <div className="booksBlock">
+        <div className="mainContainer" data-cy="mainContainer">
+            <div className="booksBlock"  data-cy="booksBlock">
                 {booksList.length > 0 ?
                     booksList.slice(0, showMoreItemsCount).map((book: Book, i: number) => {
                     return( 
-                        <div className="bookBlockWrapper" key={i.toString()}>
+                        <div className="bookBlockWrapper" key={i.toString()} data-cy={`bookBlockWrapper${i.toString()}`}>
                             <div className="bookBlockTop">
-                                <img src={book.bookImage} alt="Book"/>
+                                <img src={book.bookImage} alt="Book"  data-cy="bookBlockWrapperImage"/>
                             </div>
-                            <div  className="bookBlockBottom">
-                                <span className="bookTitle">{book.title}</span>
-                                <span className="bookDesc">{book.description}</span>
-                                <div className="buyBtn" onClick={e => handleBookView(book)}><Link to={`/book-view/${book.id}`}><button>Buy Book</button></Link></div>
+                            <div  className="bookBlockBottom" data-cy="bookBlockBottom">
+                                <span className="bookTitle" data-cy="bookTitle">{book.title}</span>
+                                <span className="bookDesc" data-cy="bookDes">{book.description}</span>
+                                <div className="buyBtn" data-cy="bookViewBtn" onClick={e => handleBookView(book)}><Link to={`/book-view/${book.id}`}><button>Buy Book</button></Link></div>
                             </div>
                         </div>)
                 })

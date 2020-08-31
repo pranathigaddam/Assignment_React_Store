@@ -87,7 +87,7 @@ function Cart(props: Props) {
     }
 
     const handleClearCartAddedItems = () => {
-        dispatch(ClearCartAddedItems());
+        dispatch(ClearCartAddedItems([]));
     }
 
     const handleBuybook = (books: Book[]) => {
@@ -100,7 +100,6 @@ function Cart(props: Props) {
         dispatch(setSelectedTabName({selectedTabName: ""}));
     }
 
-    console.log("books",books);
     const itemsPrice = books.cartItems.reduce((total: number, item: { price: number; })=> {
         return total + item.price;
     }, 0);
@@ -109,6 +108,7 @@ function Cart(props: Props) {
     const totalAmount = itemsPrice + totalTaxPerItems + shippingCharge;
     const isAddressAdded = Object.values(books.shippingAddress).filter(item => item).length === 5 ? true : false;
 
+    console.log("cartItems",cartItems);
     return(
         <div className="mainContainer">
             <div className="bookViewBlock">

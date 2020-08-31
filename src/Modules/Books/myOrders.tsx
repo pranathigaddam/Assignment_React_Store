@@ -48,7 +48,7 @@ function Myorders () {
                         </div>
                     )
                 })
-                :  <div> No items are ordered</div>
+                :  <div className="noData"> No items are ordered</div>
             }
         </div>
     </div>)

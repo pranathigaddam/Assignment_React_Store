@@ -20,6 +20,7 @@ export function getBooksListAction(){
 }
 
 export function addBookToCartAction(book: Book[]) {
+    console.log("hitted  addBookToCartAction", book );
     return {
         type: ADD_BOOK_TO_CART,
         payload: book
@@ -52,9 +53,10 @@ export function setShippingAddress(shippingAddress:ShippingAddress) {
         payload: { shippingAddress:  shippingAddress}
     }
 }
-export function ClearCartAddedItems() {
+export function ClearCartAddedItems(book: Book[]) {
     return {
-        type: CLEAR_CART_ITEMS
+        type: CLEAR_CART_ITEMS,
+        payload: book
     }
 }
 

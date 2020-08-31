@@ -50,7 +50,7 @@ export default function booksReducer( state= initialState, action: BooksActionTy
         case SET_SHIPPING_ADDRESS_LIST:
             return { ...state, ...action.payload }
         case CLEAR_CART_ITEMS:
-            return { ...state, cartItems: []}
+            return { ...state, cartItems: action.payload}
         case SET_BOUGHT_ITEMS: 
             return { ...state, myOrders: [...action.payload, ...state.myOrders]}
         case SET_SHOWMORE_ITEMS:

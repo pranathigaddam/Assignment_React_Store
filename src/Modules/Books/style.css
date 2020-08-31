@@ -61,6 +61,7 @@
 .statusDelivered {color:#4a934a; margin-left: 8px;}
 .bookOrderView>.bookViewInfo {align-items: flex-start;}
 .orderStatus { display: flex; align-items: center; justify-content: center;}
+.noData {  display: flex; justify-content: center;  align-items: center; height: 500px;}
 
 /****** Cart *****/
 .cartInfoBlock {display: flex; flex:1; margin:0 16px;}

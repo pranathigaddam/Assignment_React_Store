@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useCallback} from "react";
 import './style.css';
-import { useSelector } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import { Book, Country, State, City, ShippingAddress } from "./constants";
+import { ClearCartAddedItems } from "./actions";
 
 interface Props {
     props: any
@@ -17,8 +18,23 @@ interface RootState {
 }
 
 function BuyBook(props: Props) {
+    const dispatch = useCallback(useDispatch(), []);
     const books = useSelector((state: RootState) => state.books );
-    const { cartItems, countriesList, statesList, citiesList, shippingAddress } = books;
+    const { cartItems, countriesList, statesList, citiesList, shippingAddress, myOrders } = books;
+
+    useEffect(() => {
+        return ()=> {
+            let oldCartItems = [...cartItems];
+            myOrders.forEach((order: { id: string; }) => {
+                let index = oldCartItems.findIndex((cart: { id: string; }) => cart.id === order.id);
+                console.log("index",index);
+                if(index > -1) {
+                    oldCartItems.splice(index, 1);
+                    dispatch(ClearCartAddedItems([...oldCartItems]));
+                }
+            });  
+        }
+    }, [dispatch,myOrders, cartItems]);
 
     const itemsPrice = books.cartItems.reduce((total: number, item: { price: number; })=> {
         return total + item.price;
@@ -27,10 +43,9 @@ function BuyBook(props: Props) {
     const shippingCharge =  books.cartItems.length > 0  ? 5 : 0;
     const totalAmount = itemsPrice + totalTaxPerItems + shippingCharge;
 
-    const cityName = citiesList.filter((city: { cityCode: number; }) => city.cityCode === shippingAddress.city)[0];
-    const stateName = statesList.filter((state: { stateCode: number; }) => state.stateCode === shippingAddress.state)[0];
-    const countryName = countriesList.filter((country: { countryCode: number; }) => country.countryCode === shippingAddress.country)[0];
-
+    const cityName = citiesList.filter((city: { cityCode: number; }) => city.cityCode === Number(shippingAddress.city))[0];
+    const stateName = statesList.filter((state: { stateCode: number; }) => state.stateCode === Number(shippingAddress.state))[0];
+    const countryName = countriesList.filter((country: { countryCode: number; }) => country.countryCode === Number(shippingAddress.country))[0];
     return(
         <div className="mainContainer">
             <div className="bookViewBlock">

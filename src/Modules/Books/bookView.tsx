@@ -24,6 +24,7 @@ function BooksView (props:Props ) {
     }, [dispatch]);
 
     const handleCartItem = (book: Book) => {
+        console.log("hitted handle cart tiesm");
         dispatch(setSelectedTabName({selectedTabName: "Cart"}));
         dispatch(addBookToCartAction([book]));
     }

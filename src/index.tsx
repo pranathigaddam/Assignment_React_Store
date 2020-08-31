@@ -6,7 +6,6 @@ import Routes from './routes';
 import { configureStore } from './store';
 
 const store = configureStore();
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -15,3 +14,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root') as HTMLElement
 );
+
+
