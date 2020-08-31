@@ -27,7 +27,6 @@ function BuyBook(props: Props) {
             let oldCartItems = [...cartItems];
             myOrders.forEach((order: { id: string; }) => {
                 let index = oldCartItems.findIndex((cart: { id: string; }) => cart.id === order.id);
-                console.log("index",index);
                 if(index > -1) {
                     oldCartItems.splice(index, 1);
                     dispatch(ClearCartAddedItems([...oldCartItems]));
@@ -67,19 +66,20 @@ function BuyBook(props: Props) {
                         <div className="cartSelectedBooks">
                             { cartItems.length > 0  ?
                                     cartItems.map((book: Book, i: number) => {
-                                        return (
-                                            <div className="cartSelectedBookItem" key={i.toString()}>
+                                        return book && book.isDelivered ?
+                                            (<div className="cartSelectedBookItem" key={i.toString()}>
                                                 <div className="bookImg">
                                                     <img src={book.bookImage} alt="Cart"/>
                                                 </div>
                                                 <div className="bookName">
                                                     <h3>{book.title}</h3>
                                                 </div>
-                                            </div>
-                                        )
+                                            </div>)
+                                           
+                                        : ""
                                     })
                                 :
-                                "No items are added."
+                                <div>No items are added.</div>
                             }
                         </div>
                         <div className="cartPaymentInfo">

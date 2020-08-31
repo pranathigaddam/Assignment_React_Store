@@ -48,8 +48,6 @@ export interface booksState {
   selectedTabName: string
 }
 
-
-
 export interface Country {
   id: string
   country: string

@@ -108,7 +108,6 @@ function Cart(props: Props) {
     const totalAmount = itemsPrice + totalTaxPerItems + shippingCharge;
     const isAddressAdded = Object.values(books.shippingAddress).filter(item => item).length === 5 ? true : false;
 
-    console.log("cartItems",cartItems);
     return(
         <div className="mainContainer">
             <div className="bookViewBlock">
@@ -159,20 +158,20 @@ function Cart(props: Props) {
                         <h3 className="cartPageHeading"> Shopping Bag</h3>
                         <div className="cartSelectedBooks">
                             { cartItems.length > 0  ?
-                                    cartItems.map((book: Book, i: number) => {
-                                        return (
-                                            <div className="cartSelectedBookItem" key={i.toString()}>
-                                                <div className="bookImg">
-                                                    <img src={book.bookImage} alt="Cart"/>
-                                                </div>
-                                                <div className="bookName">
-                                                    <h3>{book.title}</h3>
-                                                </div>
+                                cartItems.map((book: Book, i: number) => { 
+                                   return book && !book.isDelivered ? (
+                                        <div className="cartSelectedBookItem" key={i.toString()}>
+                                            <div className="bookImg">
+                                                <img src={book.bookImage} alt="Cart"/>
                                             </div>
-                                        )
-                                    })
+                                            <div className="bookName">
+                                                <h3>{book.title}</h3>
+                                            </div>
+                                        </div>)
+                                    : ""
+                                })
                                 :
-                                "No items are added."
+                                 <div>No items are added.</div>
                             }
                         </div>
                         <div className="cartPaymentInfo">

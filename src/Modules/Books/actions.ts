@@ -20,7 +20,6 @@ export function getBooksListAction(){
 }
 
 export function addBookToCartAction(book: Book[]) {
-    console.log("hitted  addBookToCartAction", book );
     return {
         type: ADD_BOOK_TO_CART,
         payload: book

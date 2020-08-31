@@ -18,6 +18,7 @@ function BooksList () {
     
     useEffect(() => {
         dispatch(getBooksListAction());
+        dispatch(setSelectedTabName({selectedTabName: ""}));
     }, [dispatch]);
 
     const handleShowmoreItems = () => {

@@ -24,15 +24,15 @@ function BooksView (props:Props ) {
     }, [dispatch]);
 
     const handleCartItem = (book: Book) => {
-        console.log("hitted handle cart tiesm");
-        dispatch(setSelectedTabName({selectedTabName: "Cart"}));
         dispatch(addBookToCartAction([book]));
+        dispatch(setSelectedTabName({selectedTabName: "Cart"}));
     }
 
     const handleBuybook = (book: Book) => {
         book["isDelivered"] = true;
         book["deliveredDate"] = new Date();
         dispatch(setBoughtBooks([book]));
+        dispatch(addBookToCartAction([book]));
     }
 
     const book = books.booksList.find((book: { id: string; }) => book.id === props.match.params.id) || {};
