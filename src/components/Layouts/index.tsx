@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import './style.css';
 import { Link } from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux';
-import { setSelectedTabName } from "../Books/actions";
+import { setSelectedTabName } from "../../actions/books";
 
 
 interface Props {

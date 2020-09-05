@@ -11,7 +11,8 @@ export const SET_SHIPPING_ADDRESS_LIST = "SET_SHIPPING_ADDRESS_LIST";
 export const CLEAR_CART_ITEMS = "CLEAR_CART_ITEMS";
 export const SET_BOUGHT_ITEMS = "SET_BOUGHT_ITEMS";
 export const SET_SHOWMORE_ITEMS = "SET_SHOWMORE_ITEMS";
-export const SET_SELECTED_IABNAME = "SET_SELECTED_IABNAME";
+export const SET_SELECTED_TABNAME = "SET_SELECTED_TABNAME";
+export const SET_ERROR = "SET_ERROR";
 
 export interface Book {
   id: string
@@ -24,7 +25,7 @@ export interface Book {
   pageCount: number
   ISBN: number
   isDelivered?: boolean
-  deliveredDate?: Date 
+  deliveredDate?: Date
 }
 
 export interface ShippingAddress{
@@ -45,7 +46,8 @@ export interface booksState {
   statesList: State[]
   citiesList: City[]
   showMoreItemsCount: number  
-  selectedTabName: string
+  selectedTabName: string,
+  error: string
 }
 
 export interface Country {

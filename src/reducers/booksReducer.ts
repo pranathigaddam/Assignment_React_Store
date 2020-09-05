@@ -11,8 +11,9 @@ import {
     CLEAR_CART_ITEMS,
     SET_BOUGHT_ITEMS,
     SET_SHOWMORE_ITEMS,
-    SET_SELECTED_IABNAME
-} from './constants';
+    SET_SELECTED_TABNAME,
+    SET_ERROR
+} from '../constants/books';
 
 const initialState: booksState = {
     booksList: [],
@@ -30,7 +31,8 @@ const initialState: booksState = {
     statesList: [],
     citiesList: [],
     showMoreItemsCount: 10,
-    selectedTabName: ""
+    selectedTabName: "",
+    error: ""
   }
 
 export default function booksReducer( state= initialState, action: BooksActionTypes) : booksState {
@@ -55,7 +57,9 @@ export default function booksReducer( state= initialState, action: BooksActionTy
             return { ...state, myOrders: [...action.payload, ...state.myOrders]}
         case SET_SHOWMORE_ITEMS:
             return {...state, ...{ showMoreItemsCount: state.showMoreItemsCount + 10 }}
-        case SET_SELECTED_IABNAME:
+        case SET_SELECTED_TABNAME:
+            return {...state, ...action.payload}
+        case SET_ERROR:
             return {...state, ...action.payload}
         default:
             return state;

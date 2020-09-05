@@ -1,17 +1,25 @@
 import { 
+    City,
+    Book,
+    Country,
+    State,
     FETCH_BOOKS_LIST,
     ADD_BOOK_TO_CART, 
     FETCH_COUNTRIES_LIST, 
     FETCH_STATES_LIST, 
     FETCH_CITIES_LIST, 
-    Book,
     ShippingAddress,
     SET_SHIPPING_ADDRESS_LIST,
     CLEAR_CART_ITEMS,
     SET_BOUGHT_ITEMS,
     SET_SHOWMORE_ITEMS,
-    SET_SELECTED_IABNAME
-} from './constants';
+    SET_SELECTED_TABNAME,
+    SET_BOOKS_LIST,
+    SET_STATES_LIST,
+    SET_COUNTRIES_LIST,
+    SET_CITIES_LIST,
+    SET_ERROR
+} from '../constants/books';
 
 export function getBooksListAction(){
     return {
@@ -19,16 +27,23 @@ export function getBooksListAction(){
     }
 }
 
-export function addBookToCartAction(book: Book[]) {
+export function setBooksListAction(booksList:Book[]){
     return {
-        type: ADD_BOOK_TO_CART,
-        payload: book
+        type: SET_BOOKS_LIST,
+        payload: { booksList: booksList }
     }
 }
 
 export function getCountriesList() {
     return {
         type: FETCH_COUNTRIES_LIST
+    }
+}
+
+export function setCountriesAction(countriesList:Country[]){
+    return {
+        type: SET_COUNTRIES_LIST,
+        payload: { countriesList: countriesList }
     }
 }
 
@@ -39,10 +54,31 @@ export function getStatesList(countryCode: string) {
     }
 }
 
+export function setStatesAction(statesList:State[]){
+    return {
+        type: SET_STATES_LIST,
+        payload: { statesList: statesList }
+    }
+}
+
 export function getCitiesList(stateCode: string) {
     return {
         type: FETCH_CITIES_LIST,
         stateCode
+    }
+}
+
+export function setCitiesAction(citiesList:City[]){
+    return {
+        type: SET_CITIES_LIST,
+        payload: { citiesList: citiesList }
+    }
+}
+
+export function addBookToCartAction(book: Book[]) {
+    return {
+        type: ADD_BOOK_TO_CART,
+        payload: book
     }
 }
 
@@ -74,7 +110,13 @@ export function setShowmoreItemsCount() {
 
 export function setSelectedTabName(tabname: object) {
     return {
-        type: SET_SELECTED_IABNAME,
+        type: SET_SELECTED_TABNAME,
         payload: tabname
+    }
+}
+export function setError(error:string) {
+    return {
+        type: SET_ERROR,
+        payload: { error: error }
     }
 }

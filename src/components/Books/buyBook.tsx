@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback} from "react";
 import './style.css';
 import {useSelector, useDispatch} from 'react-redux';
-import { Book, Country, State, City, ShippingAddress } from "./constants";
-import { ClearCartAddedItems } from "./actions";
+import { Book, Country, State, City, ShippingAddress } from "../../constants/books";
+import { ClearCartAddedItems } from "../../actions/books";
 
 interface Props {
     props: any

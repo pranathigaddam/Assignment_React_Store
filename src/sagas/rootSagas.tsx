@@ -1,9 +1,8 @@
-
 import { all } from 'redux-saga/effects';
-import actionWatcher from './Modules/Books/saga';
+import booksSagaWatcher from './booksSaga';
 
 export default function* rootSaga() {
     yield all([
-        actionWatcher(),
+        booksSagaWatcher(),
     ]);
 }

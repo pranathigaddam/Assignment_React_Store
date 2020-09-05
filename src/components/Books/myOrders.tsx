@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from 'react-redux';
 import './style.css';
-import { Book } from "./constants";
+import { Book } from "../../constants/books";
+import Nodata from "../common-components/Nodata/noData";
 
 
 interface RootState {
@@ -48,7 +49,7 @@ function Myorders () {
                         </div>
                     )
                 })
-                :  <div className="noData"> No items are ordered</div>
+                :  <Nodata/>
             }
         </div>
     </div>)

@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from "react";
 import {useSelector, useDispatch } from 'react-redux';
-import { getBooksListAction, addBookToCartAction, setBoughtBooks, setSelectedTabName } from './actions';
+import { getBooksListAction, addBookToCartAction, setBoughtBooks, setSelectedTabName } from '../../actions/books';
 import { Link } from "react-router-dom";
 import './style.css';
-import { Book } from "./constants";
+import { Book } from "../../constants/books";
 
 interface Props {
     match: { params: { id: string; }; },

@@ -1,16 +1,16 @@
 import React from 'react';
-import './index.css';
+import '../index.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
-import Layouts from './Modules/Layouts';
-import BooksList from './Modules/Books';
-import BookView from './Modules/Books/bookView';
-import Cart from './Modules/Books/cart';
-import Myorders from './Modules/Books/myOrders';
-import buyBooks from './Modules/Books/buyBook';
+import Layouts from '../components/Layouts';
+import BooksList from '../components/Books';
+import BookView from '../components/Books/bookView';
+import Cart from '../components/Books/cart';
+import Myorders from '../components/Books/myOrders';
+import buyBooks from '../components/Books/buyBook';
 
 
 const Routes : React.StatelessComponent<{}> = () => {

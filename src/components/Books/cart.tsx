@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback} from "react";
 import './style.css';
 import {useSelector, useDispatch} from 'react-redux';
-import { Book, Country, State, City, ShippingAddress } from "./constants";
+import { Book, Country, State, City, ShippingAddress } from "../../constants/books";
 import { Link } from "react-router-dom";
-import { getCountriesList, getStatesList, getCitiesList, setShippingAddress, ClearCartAddedItems, setBoughtBooks, setSelectedTabName } from './actions';
+import { getCountriesList, getStatesList, getCitiesList, setShippingAddress, ClearCartAddedItems, setBoughtBooks, setSelectedTabName } from '../../actions/books';
 
 interface Props {
     props: any
@@ -107,6 +107,7 @@ function Cart(props: Props) {
     const shippingCharge =  books.cartItems.length > 0  ? 5 : 0;
     const totalAmount = itemsPrice + totalTaxPerItems + shippingCharge;
     const isAddressAdded = Object.values(books.shippingAddress).filter(item => item).length === 5 ? true : false;
+    const cartItemsArray =  cartItems.filter((book: { isDelivered: boolean; })=> book && !book.isDelivered);
 
     return(
         <div className="mainContainer">
@@ -157,10 +158,9 @@ function Cart(props: Props) {
                     <div className="cartSummary">
                         <h3 className="cartPageHeading"> Shopping Bag</h3>
                         <div className="cartSelectedBooks">
-                            { cartItems.length > 0  ?
-                                cartItems.map((book: Book, i: number) => { 
-                                   return book && !book.isDelivered ? (
-                                        <div className="cartSelectedBookItem" key={i.toString()}>
+                            { cartItemsArray.length > 0  ?
+                                cartItemsArray.map((book: Book, i: number) => { 
+                                  return (<div className="cartSelectedBookItem" key={i.toString()}>
                                             <div className="bookImg">
                                                 <img src={book.bookImage} alt="Cart"/>
                                             </div>
@@ -168,7 +168,6 @@ function Cart(props: Props) {
                                                 <h3>{book.title}</h3>
                                             </div>
                                         </div>)
-                                    : ""
                                 })
                                 :
                                  <div>No items are added.</div>
@@ -193,7 +192,7 @@ function Cart(props: Props) {
                                 <p className="totalCount">${totalAmount}</p> 
                             </div>
                             <div className="bookViewActions">
-                                <Link to="/buy-book"><button onClick={e => handleBuybook(cartItems)} disabled={!isAddressAdded} className={isAddressAdded ? "primaryBtn" : "disabledBtn"}> Checkout </button></Link>
+                                <Link to="/buy-book"><button onClick={e => handleBuybook(cartItems)} disabled={cartItemsArray.length === 0 && (!isAddressAdded)} className={isAddressAdded && cartItemsArray.length > 0 ? "primaryBtn" : "disabledBtn"}> Checkout </button></Link>
                                 <button className="defaultBtn" onClick={handleClearCartAddedItems}> Cancel </button>
                             </div>
                         </div>
