@@ -73,7 +73,6 @@
     display: flex; 
     align-items: flex-start; 
     padding: 16px 24px;
-    height: inherit;
 }
 .bookViewAvatar {
     display: flex; 
@@ -237,6 +236,19 @@
     align-items: center; 
     padding-top: 20px;
 }
+.header-left {
+    display: flex; 
+    flex:0  0 auto; 
+    margin-left: 24px;
+}
+
+.header-right {
+    padding:8px 16px; 
+    display: flex; 
+    flex:1 1 auto; 
+    align-items: center; 
+    justify-content: flex-end;
+  }
 
 /****** Cart *****/
 .cartInfoBlock {
